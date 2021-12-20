@@ -1,3 +1,3 @@
-const url = "http://localhost:5000";
+const url = "https://salt-chat.herokuapp.com";
 
 module.exports = { url };

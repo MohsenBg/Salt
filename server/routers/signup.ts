@@ -10,9 +10,10 @@ const {
 } = require("../Functions/PasswordsFunction");
 const { sendConfirmEmail } = require("../Functions/NodeMailer");
 const { url } = require("../url");
-//! /signIn
-router.post("/signIn", async (req, res) => {
+//! /signup
+router.post("/signup", async (req, res) => {
   const userName = req.body.userName;
+  const name = req.body.name;
   const password = req.body.password;
   const email = req.body.email;
 
@@ -38,6 +39,7 @@ router.post("/signIn", async (req, res) => {
 
   const MakeNewUser = new usersModel({
     userName,
+    name,
     password: hasPassword,
     emailInfo: {
       code,
@@ -46,7 +48,11 @@ router.post("/signIn", async (req, res) => {
     },
   });
   await MakeNewUser.save();
-  await sendConfirmEmail(email, `${url}/confirmEmail/${userName}/${code}`);
+  await sendConfirmEmail(
+    email,
+    `${url}/confirmEmail/${userName}/${code}`,
+    name
+  );
   res.send({
     success: true,
     uniqueUserName: true,

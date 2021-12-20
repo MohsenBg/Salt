@@ -1,19 +1,40 @@
+//express
 import { Application, response } from "express";
 const express = require("express");
-const signIn = require("./routers/singIn");
+
+//connections
+const { connectServer } = require("./config/connection");
+
+//middleware
+const bodyParser = require("body-parser");
+import { CorsOptions } from "cors";
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
+
+//routers
+const signup = require("./routers/signup");
 const login = require("./routers/logIn");
 const confirmEmail = require("./routers/confirmEmail/code");
 const find = require("./routers/finder/index");
 const app: Application = express();
-const { connectServer } = require("./config/connection");
-const bodyParser = require("body-parser");
-const cors = require("cors");
-app.use(cors()).use(bodyParser.json());
+const cookies = require("./routers/cookie/cookie");
 
+app.use(cookieParser());
+let optionsCors: CorsOptions = {
+  origin: ["http://localhost:3000"],
+  methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+  credentials: true,
+};
+app.use(cors(optionsCors)).use(bodyParser.json());
 app.use(express.static("public"));
 
-//! signIn
-app.use("", signIn);
+//!cookie/:CookiesName
+app.use("", cookies);
+
+//! signup
+app.use("", signup);
 
 //! login
 app.use("", login);
@@ -21,7 +42,7 @@ app.use("", login);
 //! confirmEmail/:userId/:code
 app.use("", confirmEmail);
 
-//! /finder/:parameter/:value/:selection
+//! /finder
 app.use("", find);
 app.use("", (req, res) => {
   res

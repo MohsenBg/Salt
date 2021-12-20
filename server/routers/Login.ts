@@ -4,6 +4,7 @@ const express = require("express");
 const router: Router = express.Router();
 const usersModel: typeof Model = require("../modules/userModules");
 const { convertPasswordToHash } = require("../Functions/PasswordsFunction");
+
 //! /login
 router.post("/login", async (req, res) => {
   const userName = req.body.userName;
@@ -20,14 +21,35 @@ router.post("/login", async (req, res) => {
     userData[0].password.salt
   );
 
-  console.log("converted: " + hasPassword.hash);
-  console.log("server: " + userData[0].password.hash);
-
   if (hasPassword.hash === userData[0].password.hash) {
-    res.send({
-      success: true,
-      MongoError: false,
-    });
+    res
+      .status(202)
+      .cookie(
+        "userLogin",
+        {
+          userName,
+          name: userData[0].name,
+          email: userData[0].emailInfo.email,
+          Status: userData[0].emailInfo.Active,
+        },
+        {
+          path: "/",
+          httpOnly: true,
+          sameSite: true,
+          //  secure: true,
+          maxAge: 1 * 60 * 1000,
+        }
+      )
+      .send({
+        success: true,
+        MongoError: false,
+        userInfo: {
+          userName: userData[0].userName,
+          name: userData[0].name,
+          email: userData[0].emailInfo.email,
+          Status: userData[0].emailInfo.Active,
+        },
+      });
   } else {
     return res.send({
       success: false,
