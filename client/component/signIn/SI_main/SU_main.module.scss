@@ -1,0 +1,107 @@
+@import url("https://fonts.googleapis.com/css2?family=Cookie&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cookie&family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+.container {
+  display: grid;
+  place-content: center;
+  height: 100%;
+  .formSignUp {
+    padding: 15px;
+    box-shadow: 0.5px 0.5px 6px gray;
+    border-radius: 8px;
+    width: 350px;
+    height: 450px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    .title {
+      font-family: "Cookie", cursive;
+      margin-top: 0;
+      font-size: 3em;
+      margin-bottom: 0;
+    }
+    .explanation {
+      font-family: "Noto Serif", serif;
+      margin-top: 0.5em;
+      padding: 0 10px;
+      color: rgb(142, 142, 142);
+      text-align: center;
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .input {
+      position: relative;
+      padding: 0 20px;
+      width: 90%;
+      input {
+        padding-left: 10px;
+        padding-right: 40px;
+        height: 40px;
+        margin-top: 0.4em;
+        width: 100%;
+        border: solid 1px rgb(199, 198, 198);
+        border-radius: 2px;
+        display: flex;
+        font-size: 12px;
+        &:focus {
+          outline: none;
+          border: solid 1px rgb(158, 156, 156);
+        }
+      }
+      .Icons {
+        font-size: 25px;
+        top: 9px;
+        right: 25px;
+        position: absolute;
+      }
+    }
+    .btnContainer {
+      padding: 0 20px;
+      margin: 0.5em 0;
+      margin-bottom: 1em;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      .buttonSubmit {
+        background-color: rgb(178, 223, 252);
+        border: none;
+        color: white;
+        border-radius: 4px;
+        font-size: 15px;
+        padding: 6px 0;
+        width: 90%;
+      }
+    }
+    .rol {
+      margin-top: 0;
+      text-align: center;
+      color: grey;
+      font-size: 12px;
+      padding: 0 20px;
+    }
+    .containerCheckBox {
+      width: 100%;
+      margin-top: 0.2em;
+      padding-left: 40px;
+      display: flex;
+      align-items: center;
+      input {
+        cursor: pointer;
+      }
+      span {
+        color: gray;
+        padding-left: 2px;
+        padding-bottom: 2px;
+        font-size: 12px;
+      }
+    }
+  }
+  .box {
+    margin-top: 1em;
+    box-shadow: 0.5px 0.5px 6px gray;
+    width: 350px;
+    border-radius: 4px;
+    height: 70px;
+    display: grid;
+    place-items: center;
+  }
+}

@@ -1,9 +1,62 @@
+import axios from "axios";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
+import { useEffect } from "react";
 import styles from "../styles/Home.module.scss";
-
+import { url } from "../url";
+import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import { userInfoActionType } from "../interface/actionsType/userInfo";
+import { STORE_STATE } from "../store";
+import { Cookies } from "react-cookie";
+const cookies = new Cookies();
 const Home: NextPage = () => {
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const userData = useSelector((state: STORE_STATE) => state.userInfo.username);
+  useEffect(() => {
+    const userCookie: any = cookies.get("Login");
+    console.log(userCookie);
+    if (userData === null) {
+      if (typeof userCookie !== "undefined") {
+        const { username, email, Status, name } = userCookie;
+        updateReduxUser(username, email, name, Status);
+      } else {
+        router.push("/login");
+      }
+    }
+  }, []);
+
+  const updateReduxUser = (
+    username: any,
+    email: any,
+    name: any,
+    Status: any
+  ) => {
+    dispatch({
+      type: userInfoActionType.EMAIL,
+      payload: email,
+    });
+    dispatch({
+      type: userInfoActionType.USERNAME,
+      payload: username,
+    });
+    dispatch({
+      type: userInfoActionType.NAME,
+      payload: name,
+    });
+    dispatch({
+      type: userInfoActionType.STATUS,
+      payload: Status,
+    });
+    if (Status) {
+      router.push("/");
+    } else {
+      router.push("/confirmEmail");
+    }
+  };
+
   return (
     <div className={styles.container}>
       <Head>

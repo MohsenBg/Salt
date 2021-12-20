@@ -1,0 +1,101 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;600&display=swap");
+.container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  .box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 350px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px gray;
+    padding: 20px;
+
+    .image {
+      margin-bottom: 1em;
+      display: grid;
+      max-width: 140px;
+    }
+    .title {
+      margin: 0.5em;
+      text-align: center;
+    }
+    .paragraph {
+      font-size: 15px;
+      text-align: center;
+      color: gray;
+    }
+
+    .input {
+      margin: 1em;
+      width: 90%;
+      input {
+        padding: 8px 10px;
+        width: 100%;
+        border: solid gray 1px;
+        border-radius: 5px;
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+    .containerBtn {
+      width: 90%;
+      button {
+        padding: 8px 10px;
+        width: 100%;
+        background-color: rgba(0, 255, 255, 0.4);
+        color: white;
+        border-radius: 5px;
+        border: none;
+      }
+    }
+    .or {
+      opacity: 0.5;
+      margin-top: 1em;
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+
+      hr {
+        width: 100%;
+      }
+      span {
+        padding: 10px;
+        margin-bottom: 8px;
+      }
+    }
+    .CreateAccount {
+      margin: 1em;
+      margin-top: 0;
+      span {
+        font-family: "Roboto Slab", serif;
+        font-weight: 600;
+        font-size: 15px;
+        cursor: pointer;
+      }
+    }
+    .line {
+      margin-top: 1.5em;
+      margin-bottom: 0.5em;
+      opacity: 0.5;
+      width: 100%;
+    }
+    .login {
+      display: flex;
+      height: 25px;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      cursor: pointer;
+      span {
+        margin-top: 10px;
+      }
+    }
+  }
+}
