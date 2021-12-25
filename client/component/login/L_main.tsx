@@ -57,16 +57,10 @@ const L_main = () => {
     if (inputsValue.password.length >= 8 && inputsValue.username.length) {
       setLoading(true);
       await axios
-        .post(
-          `${url}/login`,
-          {
-            userName: inputsValue.username,
-            password: inputsValue.password,
-          },
-          {
-            withCredentials: true,
-          }
-        )
+        .post(`${url}/login`, {
+          userName: inputsValue.username,
+          password: inputsValue.password,
+        })
         .then((res) => {
           if (res.data.success) {
             dispatch({

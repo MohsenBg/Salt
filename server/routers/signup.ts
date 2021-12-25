@@ -9,7 +9,7 @@ const {
   convertPasswordToHash,
 } = require("../Functions/PasswordsFunction");
 const { sendConfirmEmail } = require("../Functions/NodeMailer");
-const { url } = require("../url");
+const { FRONT_URL } = require("../url");
 //! /signup
 router.post("/signup", async (req, res) => {
   const userName = req.body.userName;
@@ -33,7 +33,7 @@ router.post("/signup", async (req, res) => {
     });
 
   const salt = MakeSalt();
-  const code = MakeCode();
+  const { hash, code } = MakeCode();
 
   const hasPassword = convertPasswordToHash(password, salt);
 
@@ -42,7 +42,7 @@ router.post("/signup", async (req, res) => {
     name,
     password: hasPassword,
     emailInfo: {
-      code,
+      code: hash,
       email,
       Active: false,
     },
@@ -50,7 +50,7 @@ router.post("/signup", async (req, res) => {
   await MakeNewUser.save();
   await sendConfirmEmail(
     email,
-    `${url}/confirmEmail/${userName}/${code}`,
+    `${FRONT_URL}/confirmEmail/${userName}/${code}`,
     name
   );
   res.send({

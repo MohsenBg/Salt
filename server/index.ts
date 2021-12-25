@@ -17,21 +17,18 @@ const login = require("./routers/logIn");
 const confirmEmail = require("./routers/confirmEmail/code");
 const find = require("./routers/finder/index");
 const app: Application = express();
-const cookies = require("./routers/cookie/cookie");
+//const forgetPassword = require("./routers/forgetPassword/index");
 
 app.use(cookieParser());
 let optionsCors: CorsOptions = {
-  origin: ["http://localhost:3000"],
+  origin: "*",
   methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
-  preflightContinue: false,
-  optionsSuccessStatus: 204,
-  credentials: true,
 };
 app.use(cors(optionsCors)).use(bodyParser.json());
 app.use(express.static("public"));
 
-//!cookie/:CookiesName
-app.use("", cookies);
+//!forgetPassword
+//app.use("", forgetPassword);
 
 //! signup
 app.use("", signup);

@@ -115,7 +115,10 @@ const MakeCode = () => {
     let RandomIndex = Math.floor(Math.random() * charCode.length);
     code += charCode[RandomIndex];
   }
-  return sha256(code);
+  return {
+    code,
+    hash: sha256(code),
+  };
 };
 
 const convertPasswordToHash = (password: string, salt: string) => {

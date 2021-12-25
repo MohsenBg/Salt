@@ -34,6 +34,11 @@ const userSchema = new Schema(
       },
       required: true,
     },
+    changePasswordCode: {
+      type: String,
+      required: false,
+      expires: "1m",
+    },
   },
   { timestamps: true }
 );

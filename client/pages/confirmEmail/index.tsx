@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import CE_main from "../component/confirmEmail/CE_main/CE_main";
+import CE_main from "../../component/confirmEmail/CE_main/CE_main";
 import Head from "next/head";
 import type { NextPage } from "next";
-import { STORE_STATE } from "../store";
+import { STORE_STATE } from "../../store";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 const ConfirmEmail: NextPage = () => {

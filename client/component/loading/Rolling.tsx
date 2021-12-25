@@ -3,9 +3,9 @@ import Image from "next/image";
 import RollingSvg from "../../public/assets/loading/Rolling-1s-200px.svg";
 
 interface props {
-  backGroundColor: string;
-  height: string;
-  width: string;
+  backGroundColor?: string;
+  height?: string;
+  width?: string;
 }
 const Rolling: FunctionComponent<props> = ({
   backGroundColor,
@@ -30,4 +30,9 @@ const Rolling: FunctionComponent<props> = ({
   );
 };
 
+Rolling.defaultProps = {
+  backGroundColor: "transparent",
+  width: "auto",
+  height: "auto",
+};
 export default Rolling;
