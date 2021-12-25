@@ -17,7 +17,8 @@ const login = require("./routers/logIn");
 const confirmEmail = require("./routers/confirmEmail/code");
 const find = require("./routers/finder/index");
 const app: Application = express();
-//const forgetPassword = require("./routers/forgetPassword/index");
+const forgetPassword = require("./routers/forgetPassword/index");
+const changePassword = require("./routers/forgetPassword/changePassword");
 
 app.use(cookieParser());
 let optionsCors: CorsOptions = {
@@ -27,8 +28,11 @@ let optionsCors: CorsOptions = {
 app.use(cors(optionsCors)).use(bodyParser.json());
 app.use(express.static("public"));
 
-//!forgetPassword
-//app.use("", forgetPassword);
+//! forgetPassword
+app.use("", forgetPassword);
+
+//! forgetPassword/changePassword
+app.use("", changePassword);
 
 //! signup
 app.use("", signup);
@@ -36,11 +40,13 @@ app.use("", signup);
 //! login
 app.use("", login);
 
-//! confirmEmail/:userId/:code
+//! confirmEmail
 app.use("", confirmEmail);
 
-//! /finder
+//! finder
 app.use("", find);
+
+//!404_page
 app.use("", (req, res) => {
   res
     .status(404)

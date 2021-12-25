@@ -46,6 +46,7 @@ router.post("/signup", async (req, res) => {
       email,
       Active: false,
     },
+    changePassword: "",
   });
   await MakeNewUser.save();
   await sendConfirmEmail(

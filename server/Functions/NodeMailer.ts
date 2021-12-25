@@ -137,10 +137,10 @@ const SendForgetPassword = async (
              font-weight: 500;"
              >
              <div>
-             Thanks so much for joining Salt! To finish singing up, you just
+           if you have request for changing password click button bellow 
              </div>
              <div>
-             need to confirm that we got your email right.
+             other way ignore this Email
              </div> 
              </div>
              <a href="${Link}">
@@ -155,7 +155,7 @@ const SendForgetPassword = async (
              box-shadow: 0 0 2px 1px  gray;
              "
              >
-             Confirm your Email
+             Change Password
              </button>
              </a>
       </div>
@@ -165,4 +165,4 @@ const SendForgetPassword = async (
     .catch((err: any) => console.log(err));
 };
 
-module.exports = { sendConfirmEmail };
+module.exports = { sendConfirmEmail, SendForgetPassword };

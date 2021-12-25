@@ -37,7 +37,7 @@ const userSchema = new Schema(
     changePasswordCode: {
       type: String,
       required: false,
-      expires: "1m",
+      expires: "10m",
     },
   },
   { timestamps: true }
