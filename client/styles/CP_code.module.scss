@@ -1,0 +1,104 @@
+.containerCP_code {
+  display: grid;
+  place-content: center;
+  min-height: calc(100vh - 2em);
+  margin: 1em 0;
+  .box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 350px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px gray;
+    padding: 20px;
+    .title {
+      font-family: "Cookie", cursive;
+      margin-top: 0;
+      font-size: 2em;
+
+      color: red;
+      margin-bottom: 0.5em;
+    }
+    .image {
+      display: grid;
+      max-width: 150px;
+    }
+    .paragraph {
+      font-size: 15px;
+      text-align: center;
+      color: gray;
+    }
+    .input {
+      position: relative;
+      margin-top: 0.8em;
+      width: 90%;
+      input {
+        padding: 8px 10px;
+        padding-right: 40px;
+        width: 100%;
+        border: solid gray 1px;
+        border-radius: 5px;
+        &:focus {
+          outline: none;
+        }
+      }
+      .Icons {
+        z-index: 2;
+        font-size: 25px;
+        top: 2px;
+        right: 10px;
+        position: absolute;
+      }
+    }
+    .containerBtn {
+      margin-top: 1em;
+      width: 90%;
+      button {
+        padding: 8px 10px;
+        width: 100%;
+        background-color: rgba(0, 255, 255, 0.4);
+        color: white;
+        border-radius: 5px;
+        border: none;
+      }
+    }
+    .line {
+      margin-top: 1.5em;
+      margin-bottom: 0.5em;
+      opacity: 0.5;
+      width: 100%;
+    }
+    .login {
+      display: flex;
+      height: 25px;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      cursor: pointer;
+      span {
+        margin-top: 10px;
+      }
+    }
+    .btnOk {
+      margin-top: 1em;
+      font-size: 16px;
+      font-family: "Roboto Slab", serif;
+      padding: 3px 30px;
+      border: none;
+      color: white;
+      background-color: rgba(32, 44, 58, 0.712);
+      box-shadow: 0px 0px 4px 2px rgba(32, 44, 58, 0.664);
+      border-radius: 2px;
+      cursor: pointer;
+    }
+    .loading {
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      padding-bottom: 10em;
+      position: absolute;
+    }
+  }
+}

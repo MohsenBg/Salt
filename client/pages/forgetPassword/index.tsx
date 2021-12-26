@@ -1,6 +1,6 @@
 import React from "react";
-import styles from "../styles/forgetPassword.module.scss";
-import FP_main from "../component/forgetPassword/FP_main";
+import styles from "../../styles/forgetPassword.module.scss";
+import FP_main from "../../component/forgetPassword/FP_main";
 import Head from "next/head";
 const ForgetPassword = () => {
   return (
