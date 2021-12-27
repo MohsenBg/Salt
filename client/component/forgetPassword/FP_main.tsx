@@ -6,7 +6,7 @@ import Link from "next/link";
 import axios from "axios";
 import { url } from "../../url";
 import Rolling from "../loading/Rolling";
-
+import ReCAPTCHA from "react-google-recaptcha";
 const FP_main = () => {
   const [inputValue, setInputValue] = useState("");
   const inputRef = useRef(null);
@@ -19,7 +19,10 @@ const FP_main = () => {
       inputRef.current.focus();
   }, []);
 
-  const handelSubmitBtn = async () => {
+  const recaptchaRef = useRef(null);
+
+  const onReCAPTCHAChange = async (captchaCode: any) => {
+    if (!captchaCode) return;
     if (inputValue.length >= 5) {
       setLoading(true);
       let postObject = inputValue.includes("@")
@@ -39,6 +42,15 @@ const FP_main = () => {
           }
         });
       setLoading(false);
+      //@ts-ignore
+      recaptchaRef.current.reset();
+    }
+  };
+
+  const handelSubmitBtn = async () => {
+    if (inputValue.length >= 5) {
+      //@ts-ignore
+      recaptchaRef.current.execute();
     }
   };
 
@@ -90,6 +102,16 @@ const FP_main = () => {
               <span>{warning}</span>
             </div>
           ) : null}
+          <div>
+            <ReCAPTCHA
+              size="invisible"
+              theme="light"
+              ref={recaptchaRef}
+              //@ts-ignore
+              sitekey={process.env.NEXT_PUBLIC_SITE_KEY}
+              onChange={(captcha) => onReCAPTCHAChange(captcha)}
+            />
+          </div>
           <div className={styles.containerBtn}>
             <button
               style={

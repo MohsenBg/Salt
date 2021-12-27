@@ -7,8 +7,8 @@ import axios from "axios";
 import { url } from "../../../url";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
-import { ActionsUserInfo } from "../../../interface/actions/userActions";
 import { userInfoActionType } from "../../../interface/actionsType/userInfo";
+import ReCAPTCHA from "react-google-recaptcha";
 
 enum ValidateOptions {
   NONE = "NONE",
@@ -46,7 +46,7 @@ const SU_main = () => {
     password: "",
     checkBox: false,
   });
-
+  const recaptchaRef = useRef(null);
   const router = useRouter();
 
   const emailInput = useRef(null);
@@ -57,6 +57,45 @@ const SU_main = () => {
       emailInput.current.focus();
     }
   }, []);
+
+  const onReCAPTCHAChange = async (captchaCode: any) => {
+    if (!captchaCode) return;
+    if (
+      [
+        validateInputs.email,
+        validateInputs.fullName,
+        validateInputs.username,
+        validateInputs.password,
+      ].every((status) => status === ValidateOptions.OK)
+    ) {
+      await axios
+        .post(`${url}/signup`, {
+          userName: inputsValue.username,
+          name: inputsValue.fullName,
+          password: inputsValue.password,
+          email: inputsValue.email,
+        })
+        .then(() => {
+          dispatch({
+            type: userInfoActionType.EMAIL,
+            payload: inputsValue.email,
+          });
+          dispatch({
+            type: userInfoActionType.USERNAME,
+            payload: inputsValue.username,
+          });
+          dispatch({
+            type: userInfoActionType.NAME,
+            payload: inputsValue.fullName,
+          });
+          dispatch({ type: userInfoActionType.STATUS, payload: false });
+
+          router.push("/confirmEmail");
+        });
+    }
+    //@ts-ignore
+    recaptchaRef.current.reset();
+  };
 
   const validateEmail = async (value: string) => {
     if (value.length >= 5 && value.includes("@") && value.includes(".")) {
@@ -187,30 +226,8 @@ const SU_main = () => {
         validateInputs.password,
       ].every((status) => status === ValidateOptions.OK)
     ) {
-      axios
-        .post(`${url}/signup`, {
-          userName: inputsValue.username,
-          name: inputsValue.fullName,
-          password: inputsValue.password,
-          email: inputsValue.email,
-        })
-        .then(() => {
-          dispatch({
-            type: userInfoActionType.EMAIL,
-            payload: inputsValue.email,
-          });
-          dispatch({
-            type: userInfoActionType.USERNAME,
-            payload: inputsValue.username,
-          });
-          dispatch({
-            type: userInfoActionType.NAME,
-            payload: inputsValue.fullName,
-          });
-          dispatch({ type: userInfoActionType.STATUS, payload: false });
-
-          router.push("/confirmEmail");
-        });
+      //@ts-ignore
+      recaptchaRef.current.execute();
     }
   };
 
@@ -323,6 +340,16 @@ const SU_main = () => {
           >
             show
           </span>
+        </div>
+        <div>
+          <ReCAPTCHA
+            size="invisible"
+            theme="light"
+            ref={recaptchaRef}
+            //@ts-ignore
+            sitekey={process.env.NEXT_PUBLIC_SITE_KEY}
+            onChange={(captcha) => onReCAPTCHAChange(captcha)}
+          />
         </div>
         <div className={styles.btnContainer}>
           <button

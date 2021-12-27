@@ -9,6 +9,7 @@ import { userInfoActionType } from "../../interface/actionsType/userInfo";
 import { useCookies } from "react-cookie";
 import { withCookies } from "react-cookie";
 import Rolling from "../loading/Rolling";
+import ReCAPTCHA from "react-google-recaptcha";
 
 enum InputsNames {
   EMAIL_INPUT = "EMAIL_INPUT",
@@ -27,34 +28,14 @@ const L_main = () => {
     checkBox: false,
   });
 
+  const recaptchaRef = useRef(null);
+
   const router = useRouter();
 
   const userNameInput = useRef(null);
-
-  useEffect(() => {
-    if (userNameInput) {
-      //@ts-ignore
-      userNameInput.current.focus();
-    }
-  }, []);
-
-  const handelInputChange = (inputType: string, inputValue: string) => {
-    switch (inputType) {
-      case InputsNames.USERNAME:
-        setInputsValue({ ...inputsValue, username: inputValue });
-        break;
-      case InputsNames.PASSWORD:
-        setInputsValue({ ...inputsValue, password: inputValue });
-        break;
-      default:
-        break;
-    }
-  };
-
-  const dispatch = useDispatch();
-
-  const handelSubmitBtn = async () => {
-    if (inputsValue.password.length >= 8 && inputsValue.username.length) {
+  const onReCAPTCHAChange = async (captchaCode: any) => {
+    if (!captchaCode) return;
+    if (inputsValue.password.length >= 8 && inputsValue.username.length >= 5) {
       setLoading(true);
       await axios
         .post(`${url}/login`, {
@@ -106,6 +87,36 @@ const L_main = () => {
           }
         });
       setLoading(false);
+    }
+    //@ts-ignore
+    recaptchaRef.current.reset();
+  };
+  useEffect(() => {
+    if (userNameInput) {
+      //@ts-ignore
+      userNameInput.current.focus();
+    }
+  }, []);
+
+  const handelInputChange = (inputType: string, inputValue: string) => {
+    switch (inputType) {
+      case InputsNames.USERNAME:
+        setInputsValue({ ...inputsValue, username: inputValue });
+        break;
+      case InputsNames.PASSWORD:
+        setInputsValue({ ...inputsValue, password: inputValue });
+        break;
+      default:
+        break;
+    }
+  };
+
+  const dispatch = useDispatch();
+
+  const handelSubmitBtn = async () => {
+    if (inputsValue.password.length >= 8 && inputsValue.username.length >= 5) {
+      //@ts-ignore
+      recaptchaRef.current.execute();
     }
   };
 
@@ -176,6 +187,16 @@ const L_main = () => {
           >
             show
           </span>
+        </div>
+        <div>
+          <ReCAPTCHA
+            size="invisible"
+            theme="light"
+            ref={recaptchaRef}
+            //@ts-ignore
+            sitekey={process.env.NEXT_PUBLIC_SITE_KEY}
+            onChange={(captcha) => onReCAPTCHAChange(captcha)}
+          />
         </div>
         <div className={styles.btnContainer}>
           <button
