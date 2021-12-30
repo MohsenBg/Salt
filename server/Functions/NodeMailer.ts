@@ -86,7 +86,7 @@ const sendConfirmEmail = async (email: string, Link: string, name: string) => {
     })
     .catch((err: any) => console.log(err));
 };
-const SendForgetPassword = async (
+const sendForgetPassword = async (
   email: string,
   Link: string,
   name: string
@@ -165,4 +165,4 @@ const SendForgetPassword = async (
     .catch((err: any) => console.log(err));
 };
 
-module.exports = { sendConfirmEmail, SendForgetPassword };
+module.exports = { sendConfirmEmail, sendForgetPassword };

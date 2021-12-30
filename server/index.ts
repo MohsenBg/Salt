@@ -19,7 +19,7 @@ const find = require("./routers/finder/index");
 const app: Application = express();
 const forgetPassword = require("./routers/forgetPassword/index");
 const changePassword = require("./routers/forgetPassword/changePassword");
-
+const sendConfirmEmail = require("./routers/confirmEmail/send");
 app.use(cookieParser());
 let optionsCors: CorsOptions = {
   origin: "*",
@@ -43,6 +43,8 @@ app.use("", login);
 //! confirmEmail
 app.use("", confirmEmail);
 
+//! confirmEmail/send
+app.use("", sendConfirmEmail);
 //! finder
 app.use("", find);
 

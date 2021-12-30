@@ -11,3 +11,9 @@
   justify-content: center;
   align-items: center;
 }
+
+.Rolling {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+}

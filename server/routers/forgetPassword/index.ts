@@ -2,7 +2,7 @@ import { Model } from "mongoose";
 const express = require("express");
 import { Router } from "express";
 const { MakeCode } = require("../../Functions/PasswordsFunction");
-const { SendForgetPassword } = require("../../Functions/NodeMailer");
+const { sendForgetPassword } = require("../../Functions/NodeMailer");
 const router: Router = express.Router();
 const { FRONT_URL } = require("../../url");
 const userModule: typeof Model = require("../../modules/userModules");
@@ -25,7 +25,7 @@ router.post("/forgetPassword", async (req, res) => {
       changePasswordCode: hash,
     });
 
-    await SendForgetPassword(
+    await sendForgetPassword(
       emailInfo.email,
       `${FRONT_URL}/forgetPassword/${userName}/${code}`,
       name

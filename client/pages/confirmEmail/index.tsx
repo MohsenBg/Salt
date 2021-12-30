@@ -5,6 +5,7 @@ import type { NextPage } from "next";
 import { STORE_STATE } from "../../store";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
+
 const ConfirmEmail: NextPage = () => {
   const router = useRouter();
 

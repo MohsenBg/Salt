@@ -7,30 +7,85 @@
   justify-content: center;
   flex-direction: column;
   height: 100vh;
-  .ImageContainer {
-    display: grid;
-    place-items: center;
-    width: 50%;
-    .Image {
-      display: grid;
-      place-items: center;
-      max-width: 400px;
+  .box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 350px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px gray;
+    padding: 20px;
+
+    .ImageContainer {
+      .Image {
+        display: grid;
+        place-items: center;
+        max-width: 180px;
+      }
     }
-  }
-  .title {
-    font-family: "Gochi Hand", cursive;
-    margin: 1em 0;
-    font-size: 35px;
-  }
-  .paragraph {
-    font-family: "Handlee", cursive;
-    font-size: 25px;
-    span {
-      color: rgb(101, 137, 255);
-      font-family: sans-serif;
-      font-size: 16px;
-      cursor: pointer;
-      margin-left: 8px;
+    .title {
+      font-family: "Gochi Hand", cursive;
+      z-index: 2;
+      font-size: 30px;
+      margin: 0.5em 0;
+    }
+    .paragraph {
+      font-size: 15px;
+      text-align: center;
+      color: gray;
+      span {
+        line-height: 30px;
+        color: rgb(101, 137, 255);
+        font-family: sans-serif;
+        font-size: 16px;
+        cursor: pointer;
+        margin-left: 8px;
+      }
+    }
+    .changeEmailContainer {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      .input {
+        position: relative;
+        margin: 0.5em 1em;
+        width: 100%;
+        span {
+          padding-left: 10px;
+          font-size: 12px;
+        }
+        input {
+          margin-top: 6px;
+          padding: 8px 10px;
+          width: 100%;
+          border: solid gray 1px;
+          border-radius: 5px;
+          &:focus {
+            outline: none;
+          }
+        }
+        .Icons {
+          font-size: 25px;
+          top: 29px;
+          right: 5px;
+          position: absolute;
+        }
+      }
+    }
+    .btnContainer {
+      margin-top: 0.5em;
+      button {
+        border: none;
+        font-size: 14px;
+        padding: 5px 25px;
+        color: white;
+        border-radius: 2px;
+        cursor: pointer;
+      }
     }
   }
 }
