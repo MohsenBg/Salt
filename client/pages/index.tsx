@@ -4,7 +4,7 @@ import styles from "../styles/Home.module.scss";
 import { Cookies } from "react-cookie";
 import Rolling from "../component/loading/Rolling";
 import Basic from "../component/basic/Basic";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Main from "../component/main/Main";
 import { useSelector } from "react-redux";
 import { STORE_STATE } from "../store";

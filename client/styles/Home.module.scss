@@ -1,5 +1,5 @@
 .main {
-  min-height: 100vh;
+  height: 100%;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -8,7 +8,7 @@
 }
 
 .Rolling {
-  min-height: 100vh;
+  min-height: 100%;
   display: grid;
   place-items: center;
 }
