@@ -9,12 +9,7 @@ import { useRouter } from "next/router";
 import Countdown from "react-countdown";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import { VscError } from "react-icons/vsc";
-
-enum ValidateOptions {
-  NONE = "NONE",
-  OK = "OK",
-  BAD = "BAD",
-}
+import { ValidateOptions } from "../../../interface/other/otherInterface";
 
 //* userInfo [Status, email, name, username]
 

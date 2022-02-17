@@ -1,0 +1,67 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+.container {
+  position: relative;
+  width: 100%;
+  overflow: auto;
+  .messages {
+    display: flex;
+    flex-direction: column;
+    .message {
+      position: relative;
+      width: fit-content;
+      min-width: 100px;
+      max-width: 60vh;
+      margin: 0.5em;
+      display: flex;
+      flex-direction: column;
+      border-radius: 10px;
+      padding: 5px 10px;
+      .text {
+        // word-break: break-all;
+        word-wrap: break-word;
+        cursor: pointer;
+        font-family: "Roboto", sans-serif;
+        white-space: pre-line;
+        border-radius: 8px;
+      }
+      &:first-child {
+        margin-top: 1em;
+      }
+    }
+    .time {
+      margin: 0.2em 0;
+      text-align: end;
+      color: rgb(136, 138, 134);
+      font-size: 9px;
+      text-shadow: 0 0 2px rgba(100, 99, 99, 0.596);
+    }
+  }
+  .loading {
+    height: 100%;
+  }
+  .messageData {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: calc(100% - 20px);
+    @media (min-width: 925px) {
+      width: calc(100% - 440px);
+    }
+    height: 100%;
+    top: 0;
+    transform: translateY(calc(50vh - 50%));
+    z-index: 3;
+  }
+  .StartConversation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    font-size: 1.4em;
+    padding-top: 25px;
+    color: rgb(243, 209, 209);
+    text-shadow: 0 0 10px gray;
+  }
+}

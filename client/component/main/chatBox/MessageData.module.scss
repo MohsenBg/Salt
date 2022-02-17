@@ -1,0 +1,179 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap");
+.container {
+  min-width: 250px;
+  width: 60vw;
+  @media (max-width: 520px) {
+    width: 80vw;
+  }
+  @media (max-width: 360px) {
+    width: 90vw;
+  }
+  @media (max-width: 1060px) and (min-width: 925px) {
+    width: 450px;
+  }
+  max-width: 600px;
+  height: 400px;
+  background-color: white;
+  box-shadow: 0 0 10px 0.1px gray;
+  border-radius: 8px;
+  padding: 0 20px;
+  position: relative;
+  .iconClose {
+    right: 10px;
+    top: 5px;
+    font-size: 25px;
+    color: gray;
+    cursor: pointer;
+    position: absolute;
+    &:hover {
+      color: red;
+    }
+  }
+  .head {
+    .title {
+      padding: 10px;
+      font-weight: bold;
+      font-size: 25px;
+      margin: 0;
+      text-align: center;
+      font-family: "Inter", sans-serif;
+    }
+    .row {
+      width: 100%;
+      height: 25px;
+      margin: 0.8em 0;
+      position: relative;
+      .el1 {
+        font-size: 12px;
+        position: absolute;
+        left: 0;
+        @media (max-width: 520px) {
+          font-size: 10px;
+        }
+      }
+      .el2 {
+        font-size: 14px;
+        @media (max-width: 520px) {
+          font-size: 12px;
+        }
+        @media (max-width: 360px) {
+          font-size: 10px;
+        }
+        position: absolute;
+        right: 0;
+      }
+    }
+  }
+  .body {
+    position: relative;
+    .editIcon,
+    .saveIcon {
+      position: absolute;
+      font-size: 20px;
+      right: 10px;
+      cursor: pointer;
+    }
+    .backIcon {
+      position: absolute;
+      font-size: 20px;
+      right: 40px;
+      cursor: pointer;
+    }
+    .title {
+      margin: 0.5em;
+      font-family: "Inter", sans-serif;
+      font-size: 18px;
+    }
+    .text {
+      margin-top: 0.4em;
+      textarea {
+        resize: none;
+        width: 100%;
+        border: none;
+        box-shadow: 0 0 4px 0.2px rgba(128, 128, 128, 0.8);
+        padding: 10px;
+        font-size: 14px;
+        height: 100px;
+        padding-left: 40px;
+        &:focus {
+          outline: none;
+        }
+      }
+      .iconEmojiEdit {
+        position: absolute;
+        top: 35px;
+        display: flex;
+        align-items: center;
+        padding-right: 5px;
+        border-right: solid 1px rgba(128, 128, 128, 0.404);
+        height: 90px;
+        left: 10px;
+        font-size: 20px;
+        cursor: pointer;
+      }
+    }
+
+    .deleteBtn {
+      margin-top: 1.3em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      span {
+        background-color: rgba(255, 0, 0, 0.185);
+        color: red;
+        font-size: 18px;
+        font-family: "Inter", sans-serif;
+        padding: 8px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+    }
+  }
+  .panelContainer {
+    width: 100%;
+    top: 0;
+    padding-right: 20px;
+    margin-top: 20px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .panel {
+      font-family: "Inter", sans-serif;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      z-index: 4;
+      background-color: rgb(204, 204, 204);
+      padding: 20px;
+      border-radius: 8px;
+      .btnContainer {
+        display: flex;
+        width: 100%;
+        margin: 2em 1em 1em 0;
+        .yesBtn,
+        .noBtn {
+          border-radius: 2px;
+          flex-basis: 100%;
+          text-align: center;
+          font-family: "Inter", sans-serif;
+          span {
+            cursor: pointer;
+            background-color: white;
+            padding: 5px 25px;
+            border-radius: 4px;
+          }
+        }
+      }
+    }
+  }
+  .emojiPanelEdit {
+    position: absolute;
+    top: -20px;
+    left: -25px;
+    width: fit-content;
+    height: 230px;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+}

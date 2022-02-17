@@ -1,0 +1,30 @@
+.headContainer {
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  height: 60px;
+  border-bottom: 2px solid rgba(128, 128, 128, 0.397);
+  .head {
+    display: flex;
+    .img {
+      margin-left: 3em;
+      position: relative;
+      .dot {
+        border-radius: 8px;
+        bottom: 5px;
+        right: 5px;
+        box-shadow: 1px 2px 2px black;
+        position: absolute;
+        width: 10px;
+        height: 10px;
+      }
+    }
+    .userData {
+      padding-left: 10px;
+      margin-top: 10px;
+      .username {
+        font-size: 12px;
+        color: gray;
+      }
+    }
+  }
+}

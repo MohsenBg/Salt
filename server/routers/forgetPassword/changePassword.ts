@@ -6,14 +6,14 @@ const {
   MakeSalt,
   convertPasswordToHash,
 } = require("../../Functions/PasswordsFunction");
-const userModule: typeof Model = require("../../modules/userModules");
+const userModel: typeof Model = require("../../model/userModel");
 const sha256 = require("sha256");
 
 router.post("/forgetPassword/changePassword", async (req, res) => {
   const userName = req.body.userName;
   const code = req.body.code;
   const newPassword = req.body.password;
-  const userInfo = await userModule
+  const userInfo = await userModel
     .find({ userName })
     .select(["userName", "name", "emailInfo", "changePasswordCode"]);
 
@@ -23,7 +23,7 @@ router.post("/forgetPassword/changePassword", async (req, res) => {
         const { _id, name, emailInfo, userName } = userInfo[0];
         const salt = MakeSalt();
         const { hash } = convertPasswordToHash(newPassword, salt);
-        await userModule.findByIdAndUpdate(_id, {
+        await userModel.findByIdAndUpdate(_id, {
           changePasswordCode: "",
           "password.salt": `${salt}`,
           "password.hash": `${hash}`,

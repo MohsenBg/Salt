@@ -20,6 +20,10 @@ const app: Application = express();
 const forgetPassword = require("./routers/forgetPassword/index");
 const changePassword = require("./routers/forgetPassword/changePassword");
 const sendConfirmEmail = require("./routers/confirmEmail/send");
+const conversation = require("./routers/chat/conversation");
+const message = require("./routers/chat/message");
+const searchUser = require("./routers/search/user");
+const avatar = require("./routers/avatar/index");
 app.use(cookieParser());
 let optionsCors: CorsOptions = {
   origin: "*",
@@ -45,8 +49,21 @@ app.use("", confirmEmail);
 
 //! confirmEmail/send
 app.use("", sendConfirmEmail);
+
 //! finder
 app.use("", find);
+
+//! search
+app.use("", searchUser);
+
+//! chat/conversation
+app.use("", conversation);
+
+//! chat/message
+app.use("", message);
+
+//! avatar
+app.use("", avatar);
 
 //!404_page
 app.use("", (req, res) => {

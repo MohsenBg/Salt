@@ -2,7 +2,7 @@ import { Router } from "express";
 import { Model } from "mongoose";
 const express = require("express");
 const router: Router = express.Router();
-const usersModel: typeof Model = require("../modules/userModules");
+const userModel: typeof Model = require("../model/userModel");
 const {
   MakeSalt,
   MakeCode,
@@ -18,9 +18,9 @@ router.post("/signup", async (req, res) => {
   const email = req.body.email;
 
   const userNameExist =
-    (await usersModel.find({ userName })).length > 0 ? true : false;
+    (await userModel.find({ userName })).length > 0 ? true : false;
   const userEmailExist =
-    (await usersModel.find({ "emailInfo.email": email })).length > 0
+    (await userModel.find({ "emailInfo.email": email })).length > 0
       ? true
       : false;
 
@@ -37,7 +37,7 @@ router.post("/signup", async (req, res) => {
 
   const hasPassword = convertPasswordToHash(password, salt);
 
-  const MakeNewUser = new usersModel({
+  const MakeNewUser = new userModel({
     userName,
     name,
     password: hasPassword,

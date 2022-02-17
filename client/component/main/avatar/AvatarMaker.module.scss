@@ -1,0 +1,98 @@
+.container {
+  position: relative;
+  margin: 0;
+  width: 100vw;
+  height: 100%;
+  .head {
+    z-index: 10;
+    height: auto;
+    .tabs {
+      font-size: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      .tab {
+        box-shadow: 0 0 2px 0.1px gray;
+        width: 100px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        &:hover {
+          background-color: rgba(83, 83, 83, 0.21);
+        }
+      }
+    }
+  }
+  .userAvatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    z-index: 2;
+  }
+
+  .body {
+    width: 100%;
+
+    padding: 10px;
+
+    .box {
+      .minTabs {
+        display: flex;
+        .minTab {
+          box-shadow: 0 0 2px 0.1px gray;
+          width: 120px;
+          font-size: 14px;
+          height: 30px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  .avatars {
+    display: flex;
+    flex-wrap: wrap;
+    height: calc(100vh - 340px);
+    @media (max-width: 610px) {
+      height: calc(100vh - 380px);
+    }
+    overflow: auto;
+    justify-content: center;
+    .avatar {
+      cursor: pointer;
+      &:hover {
+        background-color: rgba(128, 128, 128, 0.322);
+      }
+      height: 100px;
+      width: 100px;
+      border-radius: 8px;
+      margin: 1em;
+    }
+  }
+  .btnContainer {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    .btn {
+      flex-basis: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      span {
+        font-weight: 500;
+        background-color: rgba(0, 0, 0, 0.185);
+        padding: 8px 35px;
+        border-radius: 5px;
+        cursor: pointer;
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.285);
+        }
+      }
+    }
+  }
+}

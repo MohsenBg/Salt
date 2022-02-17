@@ -10,13 +10,7 @@ import { useCookies } from "react-cookie";
 import { withCookies } from "react-cookie";
 import Rolling from "../loading/Rolling";
 import ReCAPTCHA from "react-google-recaptcha";
-
-enum InputsNames {
-  EMAIL_INPUT = "EMAIL_INPUT",
-  FULL_NAME = "FULL_NAME",
-  USERNAME = "USERNAME",
-  PASSWORD = "PASSWORD",
-}
+import { InputsNames } from "../../interface/other/otherInterface";
 
 const L_main = () => {
   const [loading, setLoading] = useState(false);
@@ -77,7 +71,7 @@ const L_main = () => {
               {
                 // sameSite: true,
                 // httpOnly: true,
-                // secure: true,
+                secure: process.env.NODE_ENV === "production" ? true : false,
                 expires: timeExpires,
               }
             );
@@ -232,6 +226,7 @@ const L_main = () => {
     </div>
   );
 };
+
 const NewComponent = withCookies(L_main);
 //@ts-ignore
 NewComponent.WrappedComponent === L_main;

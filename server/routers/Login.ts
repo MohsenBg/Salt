@@ -2,14 +2,14 @@ import { Router } from "express";
 import { Model } from "mongoose";
 const express = require("express");
 const router: Router = express.Router();
-const usersModel: typeof Model = require("../modules/userModules");
+const userModel: typeof Model = require("../model/userModel");
 const { convertPasswordToHash } = require("../Functions/PasswordsFunction");
 
 //! /login
 router.post("/login", async (req, res) => {
   const userName = req.body.userName;
   const password = req.body.password;
-  const userData: any = await usersModel.find({ userName });
+  const userData: any = await userModel.find({ userName });
   if (userData.length === 0) {
     return res.send({
       success: false,
