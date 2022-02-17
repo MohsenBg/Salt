@@ -20,10 +20,10 @@
     overflow-x: hidden;
     background-color: #8ec5fc;
     background-image: linear-gradient(62deg, #8ec5fc 0%, #e0c3fc 100%);
-    flex-basis: 100%;
+    flex-basis: 90%;
   }
   .ChatFill {
+    flex-basis: 5%;
     width: 100%;
-    bottom: 10px;
   }
 }
