@@ -1,10 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Rowdies&display=swap");
 .container {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: flex;
   align-items: center;
   flex-direction: column;
+  position: relative;
   .text {
     margin-top: 50px;
     font-family: "Rowdies", cursive;
@@ -23,7 +24,7 @@
     flex-basis: 100%;
   }
   .ChatFill {
+    position: relative;
     width: 100%;
-    bottom: 10px;
   }
 }
