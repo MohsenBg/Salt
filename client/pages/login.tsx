@@ -2,7 +2,7 @@ import React from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import styles from "../styles/Signup.module.scss";
-import L_main from "../component/login/L_main";
+import L_main from "../component/pagesComponent/login/L_main";
 const Login: NextPage = () => {
   return (
     <div>

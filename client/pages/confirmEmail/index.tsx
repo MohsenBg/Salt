@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import CE_main from "../../component/confirmEmail/CE_main/CE_main";
+import CE_main from "../../component/pagesComponent/confirmEmail/CE_main/CE_main";
 import Head from "next/head";
 import type { NextPage } from "next";
 import { STORE_STATE } from "../../store";

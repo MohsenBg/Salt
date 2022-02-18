@@ -1,15 +1,15 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import styles from "../styles/Home.module.scss";
-import { Cookies } from "react-cookie";
-import Rolling from "../component/loading/Rolling";
-import Basic from "../component/basic/Basic";
-import { useEffect, useState } from "react";
-import Main from "../component/main/Main";
+import Rolling from "../component/other/loading/Rolling";
+import Basic from "../component/pagesComponent/home/basic/Basic";
+import { useState } from "react";
+import Main from "../component/pagesComponent/home/main/Main";
 import { useSelector } from "react-redux";
 import { STORE_STATE } from "../store";
 import Div100vh from "react-div-100vh";
-const cookies = new Cookies();
+import ContextHome from "../context/ContextHome";
+
 const Home: NextPage = () => {
   const [loading, setLoading] = useState(true);
 
@@ -42,9 +42,11 @@ const Home: NextPage = () => {
           </Head>
           <main className={styles.main}>
             {username ? (
-              <Div100vh>
-                <Main />
-              </Div100vh>
+              <ContextHome>
+                <Div100vh>
+                  <Main />
+                </Div100vh>
+              </ContextHome>
             ) : null}
           </main>
         </>

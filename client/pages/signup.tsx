@@ -2,7 +2,7 @@ import React from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import styles from "../styles/Signup.module.scss";
-import SU_main from "../component/signIn/SI_main/SU_main";
+import SU_main from "../component/pagesComponent/signIn/SI_main/SU_main";
 const Signup: NextPage = () => {
   return (
     <div>

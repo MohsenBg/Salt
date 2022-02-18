@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { url } from "../../../url";
-import Rolling from "../../../component/loading/Rolling";
+import Rolling from "../../../component/other/loading/Rolling";
 enum STATUS {
   PENDING = "PENDING",
   EXPIRE = "EXPIRE",

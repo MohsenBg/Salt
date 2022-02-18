@@ -14,3 +14,9 @@ export interface UsersOnline {
   username: string;
   socketId: string;
 }
+
+export interface User {
+  _id: string;
+  userName: string;
+  name: string;
+}

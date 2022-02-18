@@ -56,24 +56,24 @@ router.post("/confirmEmail", async (req, res) => {
     await conversation.save().then(async (result: any) => {
       let message = new messageModel({
         conversationId: result._id,
-        sender: "Mohsen",
+        sender: "MohsenBg",
         text: `hi👋
       welcome to salt-chat
       My name is Mohsen and I made this app.
       
       Tutorial 🤔
-      1- you send Message Like other app\n
-      2- you can edit or delete your message by double click or double touch on message\n
-      3- green circle means user is online and gray means user is offline\n
-      4- you can add emoji by click on emoji head left side the chat Box\n
+      1- you can send Message Like other app
+      2- you can edit or delete your message by double click or double touch on message
+      3- green circle means user is online and gray means user is offline
+      4- you can add emoji by click on emoji head left side the chat Box
       
       please if you any opinion or find any bug context me 
       GitHub:👇👇👇
       https://github.com/MohsenBg
       
       Next update(If I had time):
-      1- add Groupe\n
-      2- add calling\n
+      1- add Groupe
+      2- add calling
       3-Maybe fix some bug 🤣`,
       });
       await message.save();

@@ -4,7 +4,7 @@ import { url } from "../../../url";
 import Link from "next/link";
 import Image from "next/image";
 import LockImage from "../../../public/assets/Lock.png";
-import Rolling from "../../../component/loading/Rolling";
+import Rolling from "../../../component/other/loading/Rolling";
 import { GetServerSideProps } from "next";
 import sha256 from "sha256";
 import styles from "../../../styles/CP_code.module.scss";
