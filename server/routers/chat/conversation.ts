@@ -25,11 +25,14 @@ router.post("/chat/conversation", async (req, res) => {
 
 router.get("/chat/conversation/:username", async (req, res) => {
   const { username } = req.params;
+
   await conversationModel
     .find({
       members: { $elemMatch: { userName: username } },
     })
     .then(async (result) => {
+      console.log(result);
+
       res.send(result);
     })
     .catch((error) => res.status(500).send({ result: "failed", error }));

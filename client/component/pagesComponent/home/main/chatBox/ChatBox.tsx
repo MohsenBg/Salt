@@ -9,7 +9,7 @@ import { ArrivalMessage } from "../../../../../interface/other/MessageInterface"
 import { MessageContext } from "../../../../../context/ContextHome";
 
 const ChatBox = () => {
-  const { name, conversation_Selected_Id } = useSelector(
+  const { selected_conversation } = useSelector(
     (state: STORE_STATE) => state.conversation
   );
   const arrivalMessage: null | ArrivalMessage = useSelector(
@@ -22,7 +22,7 @@ const ChatBox = () => {
     const setWebSocketMessage = () => {
       //@ts-ignore
       let { MessageType, message }: ArrivalMessage = arrivalMessage;
-      if (conversation_Selected_Id !== message.conversationId) return;
+      if (selected_conversation._id !== message.conversationId) return;
       switch (MessageType) {
         case "send":
           if (messages) setMessages([...messages, message]);
@@ -49,12 +49,12 @@ const ChatBox = () => {
           break;
       }
     };
-    if (arrivalMessage && conversation_Selected_Id) setWebSocketMessage();
+    if (arrivalMessage && selected_conversation._id) setWebSocketMessage();
   }, [arrivalMessage]);
 
   return (
     <div className={styles.container}>
-      {name === "none" ? (
+      {selected_conversation.name === "none" ? (
         <div className={styles.text}>Select a Conversation First</div>
       ) : (
         <>

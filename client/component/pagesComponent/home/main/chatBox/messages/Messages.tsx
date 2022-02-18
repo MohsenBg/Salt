@@ -15,7 +15,7 @@ TimeAgo.addDefaultLocale(en);
 const timeAgo = new TimeAgo("en-US");
 
 const Messages = () => {
-  const { conversation_Selected_Id } = useSelector(
+  const { selected_conversation } = useSelector(
     (state: STORE_STATE) => state.conversation
   );
   const username = useSelector((state: STORE_STATE) => state.userInfo.username);
@@ -24,16 +24,21 @@ const Messages = () => {
   const { messages, setMessages } = useContext(MessageContext);
   useEffect(() => {
     const getMessage = async () => {
-      if (conversation_Selected_Id === "none") return;
+      if (
+        selected_conversation._id === "none" ||
+        selected_conversation._id === "new"
+      )
+        return setMessages([]);
+
       setLoading(true);
       await axios
-        .get(`${url}/chat/message/${conversation_Selected_Id}`)
+        .get(`${url}/chat/message/${selected_conversation._id}`)
         .then((result) => setMessages(result.data.result))
         .catch((error) => console.log(error));
       setLoading(false);
     };
     getMessage();
-  }, [conversation_Selected_Id]);
+  }, [selected_conversation._id]);
 
   useEffect(() => {
     let messagesContainer = document.getElementById("messages-Container");

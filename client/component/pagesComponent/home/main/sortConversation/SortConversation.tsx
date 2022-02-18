@@ -12,11 +12,14 @@ import { message } from "../../../../../interface/other/MessageInterface";
 const SortConversation = () => {
   const [conversations, setConversations] =
     useState<null | Array<Conversation>>(null);
+
   const username = useSelector((state: STORE_STATE) => state.userInfo.username);
+
   const allConventions = useSelector(
     (state: STORE_STATE) => state.conversation.allConventions
   );
-  const { conversation_Selected_Id } = useSelector(
+
+  const { selected_conversation } = useSelector(
     (state: STORE_STATE) => state.conversation
   );
 
@@ -26,7 +29,7 @@ const SortConversation = () => {
 
   const dispatch = useDispatch();
 
-  const dispatchAllConventions = (data: Array<Conversation>) => {
+  const dispatchAllConversation = (data: Array<Conversation>) => {
     data.sort(
       (a, b) =>
         Date.parse(b.lastMessage?.createdAt) -
@@ -38,6 +41,7 @@ const SortConversation = () => {
     });
   };
 
+  //! fetch userConversation
   useEffect(() => {
     const getAllConversation = async () => {
       await axios
@@ -51,6 +55,7 @@ const SortConversation = () => {
     if (username) getAllConversation();
   }, [username]);
 
+  //! fetch last message of Conversation
   useEffect(() => {
     const getData = async () => {
       let data: Array<Conversation> = [];
@@ -76,11 +81,12 @@ const SortConversation = () => {
           });
         });
 
-      dispatchAllConventions(data);
+      dispatchAllConversation(data);
     };
     if (conversations) getData();
   }, [conversations]);
 
+  //! update last Message when on send MessageType
   const send = (Message: message) => {
     if (!Message) return;
     return allConventions?.map((con) => {
@@ -90,6 +96,7 @@ const SortConversation = () => {
     });
   };
 
+  //! update last Message when on edit MessageType
   const edit = (Message: message) => {
     if (!allConventions?.some((con) => con._id === Message.conversationId))
       return;
@@ -101,6 +108,7 @@ const SortConversation = () => {
     });
   };
 
+  //! update last Message when on delete MessageType
   const Delete = async (Message: message) => {
     if (!allConventions?.some((con) => con._id === Message.conversationId))
       return;
@@ -121,11 +129,12 @@ const SortConversation = () => {
     });
   };
 
+  //! update last seen of conversations
   const updateLocalStorage = (msg: message) => {
     if (!msg) return;
     if (conversations)
-      if (conversation_Selected_Id === msg.conversationId)
-        setLocalStorageConvection(conversation_Selected_Id);
+      if (selected_conversation._id === msg.conversationId)
+        setLocalStorageConvection(selected_conversation._id);
   };
 
   const updateConversions = async (messageInfo: ArrivalMessage) => {
@@ -134,16 +143,16 @@ const SortConversation = () => {
     switch (MessageType) {
       case "send":
         newConversation = send(message);
-        if (newConversation) dispatchAllConventions(newConversation);
+        if (newConversation) dispatchAllConversation(newConversation);
         break;
       case "edit":
         newConversation = edit(message);
-        if (newConversation) dispatchAllConventions(newConversation);
+        if (newConversation) dispatchAllConversation(newConversation);
         break;
       case "delete":
         newConversation = await Delete(message);
         //@ts-ignore
-        if (newConversation) dispatchAllConventions(newConversation);
+        if (newConversation) dispatchAllConversation(newConversation);
         break;
 
       default:
@@ -152,10 +161,12 @@ const SortConversation = () => {
     updateLocalStorage(message);
   };
 
+  //! update when user send or delete or edit Message
   useEffect(() => {
     if (sendMessage) updateConversions(sendMessage);
   }, [sendMessage]);
 
+  //! update when user receive MessageType delete or edit or send
   useEffect(() => {
     if (arrivalMessage) updateConversions(arrivalMessage);
   }, [arrivalMessage]);

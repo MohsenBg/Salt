@@ -22,6 +22,7 @@ const Main = () => {
   const username = useSelector((state: STORE_STATE) => state.userInfo.username);
   const socket = useSelector((state: STORE_STATE) => state.webSocket.socket);
 
+  //! open and close sidle bar
   const handelArrow = () => {
     if (window.innerWidth > 925) return;
     let arrowIcon = document.getElementById("arrow-Icon-sideBar");
@@ -46,6 +47,7 @@ const Main = () => {
     setSideBar(!sideBar);
   };
 
+  //! listen to window resize and set status of setSideBar false (on desktop view > 925px)
   useEffect(() => {
     const handelSidLeft = () => {
       if (window.innerWidth < 925) return;
@@ -69,6 +71,7 @@ const Main = () => {
     return () => window.removeEventListener("resize", handelSidLeft);
   }, []);
 
+  //! fetch user Avatar
   useEffect(() => {
     const getUserAvatar = async () => {
       await axios

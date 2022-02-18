@@ -27,7 +27,7 @@ interface Props {
   close: any;
 }
 const MessageData: FunctionComponent<Props> = ({ messageInfo, close }) => {
-  const userName = useSelector((state: STORE_STATE) => state.userInfo.username);
+  const username = useSelector((state: STORE_STATE) => state.userInfo.username);
   const [readOnlyInput, setReadOnlyInput] = useState(true);
   const [textareaValue, setTextareaValue] = useState(messageInfo.text);
   const [deletePanel, setDeletePanel] = useState(false);
@@ -65,7 +65,7 @@ const MessageData: FunctionComponent<Props> = ({ messageInfo, close }) => {
             else return msg;
           });
           socket.emit("editMessage", {
-            to: username,
+            to: selected_conversation.username,
             data: result.data,
           });
           setMessages(newMassage);
@@ -84,7 +84,7 @@ const MessageData: FunctionComponent<Props> = ({ messageInfo, close }) => {
   const socket: Socket = useSelector(
     (state: STORE_STATE) => state.webSocket.socket
   );
-  const { conversation_Selected_Id, username } = useSelector(
+  const { selected_conversation } = useSelector(
     (state: STORE_STATE) => state.conversation
   );
 
@@ -97,7 +97,7 @@ const MessageData: FunctionComponent<Props> = ({ messageInfo, close }) => {
         let newMassage = messages?.filter((msg) => messageInfo._id !== msg._id);
         setMessages(newMassage);
         socket.emit("deleteMessage", {
-          to: username,
+          to: selected_conversation.username,
           data: messageInfo,
         });
         close(null);
@@ -130,13 +130,13 @@ const MessageData: FunctionComponent<Props> = ({ messageInfo, close }) => {
         <div className={styles.row}>
           <span className={styles.el1}>Sender:</span>
           <span className={styles.el2}>
-            {messageInfo.sender === userName ? "you" : messageInfo.sender}
+            {messageInfo.sender === username ? "you" : messageInfo.sender}
           </span>
         </div>
       </div>
       <hr />
       <div className={styles.body}>
-        {messageInfo.sender === userName ? (
+        {messageInfo.sender === username ? (
           <>
             {readOnlyInput ? (
               <div
@@ -176,7 +176,7 @@ const MessageData: FunctionComponent<Props> = ({ messageInfo, close }) => {
             <BsEmojiExpressionless />
           </div>
         </div>
-        {messageInfo.sender === userName ? (
+        {messageInfo.sender === username ? (
           <div className={styles.deleteBtn}>
             <span onClick={() => setDeletePanel(true)}>Delete</span>
           </div>

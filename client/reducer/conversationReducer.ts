@@ -6,16 +6,20 @@ import { setLocalStorageConvection } from "../localStorage/localStorage";
 const { ALL_CONVERSATION, SELECTED_CONVERSATION } = ActionType;
 
 interface STATE {
-  conversation_Selected_Id: string;
-  username: string;
-  name: string;
+  selected_conversation: {
+    _id: string;
+    username: string;
+    name: string;
+  };
   allConventions: null | Array<Conversation>;
 }
 
 const conversationState: STATE = {
-  conversation_Selected_Id: "none",
-  username: "none",
-  name: "none",
+  selected_conversation: {
+    _id: "none",
+    username: "none",
+    name: "none",
+  },
   allConventions: null,
 };
 
@@ -25,13 +29,15 @@ export const conversationReducer = (
 ) => {
   switch (type) {
     case SELECTED_CONVERSATION:
-      setLocalStorageConvection(state.conversation_Selected_Id);
+      setLocalStorageConvection(state.selected_conversation._id);
       setLocalStorageConvection(payload.id);
       return {
         ...state,
-        conversation_Selected_Id: payload.id,
-        username: payload.username,
-        name: payload.name,
+        selected_conversation: {
+          _id: payload.id,
+          username: payload.username,
+          name: payload.name,
+        },
       };
 
     case ALL_CONVERSATION:

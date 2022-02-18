@@ -5,173 +5,7 @@ import { useSelector } from "react-redux";
 import { STORE_STATE } from "../../../../../store";
 import { url } from "../../../../../url";
 import styles from "./AvatarMaker.module.scss";
-
-const configs = {
-  topType: [
-    "NoHair",
-    "Eyepatch",
-    "Hat",
-    "Hijab",
-    "Turban",
-    "WinterHat1",
-    "WinterHat2",
-    "WinterHat3",
-    "WinterHat4",
-    "LongHairBigHair",
-    "LongHairBob",
-    "LongHairBun",
-    "LongHairCurly",
-    "LongHairCurvy",
-    "LongHairDreads",
-    "LongHairFrida",
-    "LongHairFro",
-    "LongHairFroBand",
-    "LongHairNotTooLong",
-    "LongHairShavedSides",
-    "LongHairMiaWallace",
-    "LongHairStraight",
-    "LongHairStraight2",
-    "LongHairStraightStrand",
-    "ShortHairDreads01",
-    "ShortHairDreads02",
-  ],
-  accessoriesType: [
-    "Blank",
-    "Kurt",
-    "Prescription01",
-    "Prescription02",
-    "Round",
-    "Sunglasses",
-    "Wayfarers",
-  ],
-  hatColor: [
-    "Black",
-    "Blue01",
-    "Blue02",
-    "Blue03",
-    "Gray01",
-    "Gray02",
-    "Heather",
-    "PastelBlue",
-    "PastelGreen",
-    "PastelOrange",
-    "PastelRed",
-    "PastelYellow",
-    "Pink",
-    "Red",
-    "White",
-  ],
-  hairColor: [
-    "Auburn",
-    "Black",
-    "Blonde",
-    "BlondeGolden",
-    "Brown",
-    "BrownDark",
-    "PastelPink",
-    "Platinum",
-    "Red",
-    "SilverGray",
-  ],
-  facialHairType: [
-    "Blank",
-    "BeardMedium",
-    "BeardLight",
-    "BeardMajestic",
-    "MoustacheFancy",
-    "MoustacheMagnum",
-  ],
-  facialHairColor: [
-    "Auburn",
-    "Black",
-    "Blonde",
-    "BlondeGolden",
-    "Brown",
-    "BrownDark",
-    "Platinum",
-    "Red",
-  ],
-  clotheType: [
-    "BlazerShirt",
-    "BlazerSweater",
-    "CollarSweater",
-    "GraphicShirt",
-    "Hoodie",
-    "Overall",
-    "ShirtCrewNeck",
-    "ShirtScoopNeck",
-    "ShirtVNeck",
-  ],
-  clotheColor: [
-    "Black",
-    "Blue01",
-    "Blue02",
-    "Blue03",
-    "Gray01",
-    "Gray02",
-    "Heather",
-    "PastelBlue",
-    "PastelGreen",
-    "PastelOrange",
-    "PastelRed",
-    "PastelYellow",
-    "Pink",
-    "Red",
-    "White",
-  ],
-
-  eyeType: [
-    "Close",
-    "Cry",
-    "Default",
-    "Dizzy",
-    "EyeRoll",
-    "Happy",
-    "Hearts",
-    "Side",
-    "Squint",
-    "Surprised",
-    "Wink",
-    "WinkWacky",
-  ],
-  eyebrowType: [
-    "Angry",
-    "AngryNatural",
-    "Default",
-    "DefaultNatural",
-    "FlatNatural",
-    "RaisedExcited",
-    "RaisedExcitedNatural",
-    "SadConcerned",
-    "SadConcernedNatural",
-    "UnibrowNatural",
-    "UpDown",
-    "UpDownNatural",
-  ],
-  mouthType: [
-    "Concerned",
-    "Default",
-    "Disbelief",
-    "Eating",
-    "Grimace",
-    "Sad",
-    "ScreamOpen",
-    "Serious",
-    "Smile",
-    "Tongue",
-    "Twinkle",
-    "Vomit",
-  ],
-  skinColor: [
-    "Tanned",
-    "Yellow",
-    "Pale",
-    "Light",
-    "Brown",
-    "DarkBrown",
-    "Black",
-  ],
-};
+import { configsAvatar } from "../../../../../functions/avatar/avatar";
 
 const tabs = [
   {
@@ -199,6 +33,7 @@ const tabs = [
     minTabs: ["clotheType", "clotheColor"],
   },
 ];
+
 const AvatarMaker = ({
   currentUserAvatar,
   setAvatarStatus,
@@ -208,7 +43,7 @@ const AvatarMaker = ({
   const [MinTab, setMinTab] = useState("skinColor");
   const [RenderAvatar, setRenderAvatar] = useState({
     id: "skinColor",
-    data: [...configs.skinColor],
+    data: [...configsAvatar.skinColor],
   });
   const [userAvatar, setUserAvatar] = useState({
     topType: "NoHair",
@@ -226,46 +61,64 @@ const AvatarMaker = ({
   useEffect(() => {
     switch (MinTab) {
       case "topType":
-        setRenderAvatar({ id: "topType", data: [...configs.topType] });
+        setRenderAvatar({ id: "topType", data: [...configsAvatar.topType] });
         break;
       case "hairColor":
-        setRenderAvatar({ id: "hairColor", data: [...configs.hairColor] });
+        setRenderAvatar({
+          id: "hairColor",
+          data: [...configsAvatar.hairColor],
+        });
         break;
       case "accessoriesType":
         setRenderAvatar({
           id: "accessoriesType",
-          data: [...configs.accessoriesType],
+          data: [...configsAvatar.accessoriesType],
         });
         break;
       case "eyeType":
-        setRenderAvatar({ id: "eyeType", data: [...configs.eyeType] });
+        setRenderAvatar({ id: "eyeType", data: [...configsAvatar.eyeType] });
         break;
       case "eyebrowType":
-        setRenderAvatar({ id: "eyebrowType", data: [...configs.eyebrowType] });
+        setRenderAvatar({
+          id: "eyebrowType",
+          data: [...configsAvatar.eyebrowType],
+        });
         break;
       case "clotheType":
-        setRenderAvatar({ id: "clotheType", data: [...configs.clotheType] });
+        setRenderAvatar({
+          id: "clotheType",
+          data: [...configsAvatar.clotheType],
+        });
         break;
       case "clotheColor":
-        setRenderAvatar({ id: "clotheColor", data: [...configs.clotheColor] });
+        setRenderAvatar({
+          id: "clotheColor",
+          data: [...configsAvatar.clotheColor],
+        });
         break;
       case "facialHairType":
         setRenderAvatar({
           id: "facialHairType",
-          data: [...configs.facialHairType],
+          data: [...configsAvatar.facialHairType],
         });
         break;
       case "facialHairColor":
         setRenderAvatar({
           id: "facialHairColor",
-          data: [...configs.facialHairColor],
+          data: [...configsAvatar.facialHairColor],
         });
         break;
       case "mouthType":
-        setRenderAvatar({ id: "mouthType", data: [...configs.mouthType] });
+        setRenderAvatar({
+          id: "mouthType",
+          data: [...configsAvatar.mouthType],
+        });
         break;
       case "skinColor":
-        setRenderAvatar({ id: "skinColor", data: [...configs.skinColor] });
+        setRenderAvatar({
+          id: "skinColor",
+          data: [...configsAvatar.skinColor],
+        });
         break;
       default:
         break;
@@ -433,62 +286,62 @@ const AvatarMaker = ({
                       RenderAvatar.id === "topType"
                         ? Render
                         : RenderAvatar.id === "hairColor"
-                        ? configs.topType[12]
-                        : configs.topType[0]
+                        ? configsAvatar.topType[12]
+                        : configsAvatar.topType[0]
                     }
                     hairColor={
                       RenderAvatar.id === "hairColor"
                         ? Render
-                        : configs.hairColor[0]
+                        : configsAvatar.hairColor[0]
                     }
                     accessoriesType={
                       RenderAvatar.id === "accessoriesType"
                         ? Render
-                        : configs.accessoriesType[0]
+                        : configsAvatar.accessoriesType[0]
                     }
                     eyeType={
                       RenderAvatar.id === "eyeType"
                         ? Render
-                        : configs.eyeType[0]
+                        : configsAvatar.eyeType[0]
                     }
                     eyebrowType={
                       RenderAvatar.id === "eyebrowType"
                         ? Render
-                        : configs.eyebrowType[0]
+                        : configsAvatar.eyebrowType[0]
                     }
                     clotheType={
                       RenderAvatar.id === "clotheType"
                         ? Render
                         : RenderAvatar.id === "clotheColor"
-                        ? configs.clotheType[3]
-                        : configs.clotheType[0]
+                        ? configsAvatar.clotheType[3]
+                        : configsAvatar.clotheType[0]
                     }
                     clotheColor={
                       RenderAvatar.id === "clotheColor"
                         ? Render
-                        : configs.clotheColor[0]
+                        : configsAvatar.clotheColor[0]
                     }
                     facialHairType={
                       RenderAvatar.id === "facialHairType"
                         ? Render
                         : RenderAvatar.id === "facialHairColor"
-                        ? configs.facialHairType[1]
-                        : configs.facialHairType[0]
+                        ? configsAvatar.facialHairType[1]
+                        : configsAvatar.facialHairType[0]
                     }
                     facialHairColor={
                       RenderAvatar.id === "facialHairColor"
                         ? Render
-                        : configs.facialHairColor[2]
+                        : configsAvatar.facialHairColor[2]
                     }
                     mouthType={
                       RenderAvatar.id === "mouthType"
                         ? Render
-                        : configs.mouthType[10]
+                        : configsAvatar.mouthType[10]
                     }
                     skinColor={
                       RenderAvatar.id === "skinColor"
                         ? Render
-                        : configs.skinColor[2]
+                        : configsAvatar.skinColor[2]
                     }
                   />
                 </div>

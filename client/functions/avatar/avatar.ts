@@ -1,4 +1,4 @@
-const configs = {
+export const configsAvatar = {
   topType: [
     "NoHair",
     "Eyepatch",
@@ -165,7 +165,7 @@ const configs = {
   ],
 };
 
-const configsKeys = Object.keys(configs);
+const configsKeys = Object.keys(configsAvatar);
 
 export function generateRandomAvatarOptions() {
   const options = {};

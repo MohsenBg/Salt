@@ -5,7 +5,7 @@ import { STORE_STATE } from "../../../../../../store";
 import Avatars from "../../avatar/Avatars";
 import styles from "./Head.module.scss";
 const Head = () => {
-  const { name, username } = useSelector(
+  const { selected_conversation } = useSelector(
     (state: STORE_STATE) => state.conversation
   );
   const { usersOnline } = useContext(UsersOnlineContext);
@@ -13,13 +13,15 @@ const Head = () => {
     <div className={styles.headContainer}>
       <div className={styles.head}>
         <div className={styles.img}>
-          <Avatars userName={username} />
+          <Avatars userName={selected_conversation.username} />
           {usersOnline ? (
             <div
               className={styles.dot}
               style={
-                usersOnline.filter((user: any) => user.username === username)
-                  .length > 0
+                usersOnline.filter(
+                  (user: any) =>
+                    user.username === selected_conversation.username
+                ).length > 0
                   ? { backgroundColor: "lightgreen" }
                   : { backgroundColor: "gray" }
               }
@@ -27,8 +29,10 @@ const Head = () => {
           ) : null}
         </div>
         <div className={styles.userData}>
-          <div className={styles.name}>{name}</div>
-          <div className={styles.username}>@{username}</div>
+          <div className={styles.name}>{selected_conversation.name}</div>
+          <div className={styles.username}>
+            @{selected_conversation.username}
+          </div>
         </div>
       </div>
     </div>

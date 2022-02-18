@@ -11,7 +11,6 @@ import Avatars from "../../avatar/Avatars";
 import { STORE_STATE } from "../../../../../../store";
 import { BsExclamationLg } from "react-icons/bs";
 import { Conversation } from "../../../../../../interface/other/conversationInterface";
-import { UsersOnline } from "../../../../../../interface/other/otherInterface";
 import { UsersOnlineContext } from "../../../../../../context/ContextHome";
 
 interface Props {
@@ -32,7 +31,7 @@ const Conversations: FunctionComponent<Props> = ({ Conversation }) => {
       },
     });
   };
-  const { conversation_Selected_Id } = useSelector(
+  const { selected_conversation } = useSelector(
     (state: STORE_STATE) => state.conversation
   );
 
@@ -49,7 +48,7 @@ const Conversations: FunctionComponent<Props> = ({ Conversation }) => {
       else setNewMessage(true);
     };
     checkNewMessage();
-  }, [Conversation.lastMessage, conversation_Selected_Id]);
+  }, [Conversation.lastMessage, selected_conversation._id]);
 
   return (
     <div onClick={handelClick}>
@@ -57,7 +56,7 @@ const Conversations: FunctionComponent<Props> = ({ Conversation }) => {
         <div
           className={styles.conversation}
           style={
-            Conversation._id === conversation_Selected_Id
+            Conversation._id === selected_conversation._id
               ? {
                   backgroundColor: " #D9AFD9",
                   backgroundImage:
