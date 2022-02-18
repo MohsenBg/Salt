@@ -56,9 +56,9 @@
   .avatars {
     display: flex;
     flex-wrap: wrap;
-    height: calc(100vh - 340px);
+    height: calc(100vh - 390px);
     @media (max-width: 610px) {
-      height: calc(100vh - 380px);
+      height: calc(100vh - 440px);
     }
     overflow: auto;
     justify-content: center;
