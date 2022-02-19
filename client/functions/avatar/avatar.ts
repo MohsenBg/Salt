@@ -167,6 +167,7 @@ export const configsAvatar = {
 
 const configsKeys = Object.keys(configsAvatar);
 
+//! Make Random Avatar
 export function generateRandomAvatarOptions() {
   const options = {};
   const keys = [...configsKeys];

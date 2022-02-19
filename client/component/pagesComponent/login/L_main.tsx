@@ -27,6 +27,8 @@ const L_main = () => {
   const router = useRouter();
 
   const userNameInput = useRef(null);
+
+  //! handel CAPTCHA on change value
   const onReCAPTCHAChange = async (captchaCode: any) => {
     if (!captchaCode) return;
     if (inputsValue.password.length >= 8 && inputsValue.username.length >= 5) {
@@ -59,6 +61,7 @@ const L_main = () => {
             } else {
               router.push("/confirmEmail");
             }
+            //* 1 day
             let timeExpires = new Date(Date.now() + 86400 * 1000);
             setCookie(
               "Login",
@@ -92,6 +95,7 @@ const L_main = () => {
     }
   }, []);
 
+  //! set value of input
   const handelInputChange = (inputType: string, inputValue: string) => {
     switch (inputType) {
       case InputsNames.USERNAME:
@@ -114,6 +118,7 @@ const L_main = () => {
     }
   };
 
+  //! on press Enter btn submit
   const onPressEnter = (key: string) => {
     if (key === "Enter") handelSubmitBtn();
   };

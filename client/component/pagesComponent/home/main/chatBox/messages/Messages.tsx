@@ -93,7 +93,9 @@ const Messages = () => {
                       >
                         <div className={styles.text}>{msg.text}</div>
                         <div className={styles.time}>
-                          {timeAgo.format(Date.parse(msg.createdAt))}
+                          {msg.createdAt
+                            ? timeAgo.format(Date.parse(msg.createdAt))
+                            : "sending"}
                         </div>
                       </div>
                     );

@@ -14,14 +14,18 @@ const FP_main = () => {
   const [loading, setLoading] = useState(false);
   const [warning, setWarning] = useState("");
   const [Email, setEmail] = useState("");
+
+  //! auto focus email
   useEffect(() => {
     if (inputRef.current !== null)
       //@ts-ignore
       inputRef.current.focus();
   }, []);
 
+  //!captchaRef
   const recaptchaRef = useRef(null);
 
+  //! handel CAPTCHA on change value
   const onReCAPTCHAChange = async (captchaCode: any) => {
     if (!captchaCode) return;
     if (inputValue.length >= 5) {

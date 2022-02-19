@@ -4,6 +4,7 @@ let latestTouchTap = {
   target: null,
 };
 
+//! Double touch event
 export default function isDblTouchTap(event: any) {
   const touchTap = {
     time: new Date().getTime(),

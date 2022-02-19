@@ -21,6 +21,7 @@ const CE_main = ({ userInfo }: any) => {
   const [validateInput, setValidateInput] = useState(ValidateOptions.OK);
 
   const router = useRouter();
+  //! Check email user Active or not
   const checkStatus = async () => {
     const statusUser = await axios
       .post(`${url}/finder`, {
@@ -35,16 +36,19 @@ const CE_main = ({ userInfo }: any) => {
   const timerRef = useRef(null);
   const emailInput = useRef(null);
   const btnRef = useRef(null);
+
   useEffect(() => {
     if (data) {
       if (data[0].emailInfo.Active) router.push("/");
     }
   }, [data]);
 
+  //! Start Timer
   useEffect(() => {
     if (timerRef.current !== null) sendTimer();
   }, []);
 
+  //! when user change email
   const handelChangeBtn = () => {
     if (validateInput === ValidateOptions.OK) {
       setChangeEmail(!changeEmail);
@@ -57,6 +61,7 @@ const CE_main = ({ userInfo }: any) => {
     }
   };
 
+  //! timer Function
   const sendTimer = () => {
     setTimer(Date.now() + 2 * 60 * 1000);
     setTimeout(() => {
@@ -65,6 +70,7 @@ const CE_main = ({ userInfo }: any) => {
     }, 100);
   };
 
+  //! request server for send code to user Email
   const sendEmail = async () => {
     await axios
       .post(`${url}/confirmEmail/send`, {
@@ -74,6 +80,7 @@ const CE_main = ({ userInfo }: any) => {
       .then((res) => sendTimer());
   };
 
+  //! check value is email
   const validateEmail = async (value: string) => {
     if (value.length >= 5 && value.includes("@") && value.includes(".")) {
       await axios

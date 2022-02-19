@@ -23,6 +23,7 @@ const ContextHome = ({ children }: any) => {
   const [usersOnline, setUsersOnline] = useState<null | Array<UsersOnline>>(
     null
   );
+
   return (
     <>
       <MessageContext.Provider

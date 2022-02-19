@@ -49,10 +49,10 @@ router.post("/chat/deleteMessage", async (req, res) => {
 //! getMessage By conversationId
 router.get("/chat/message/:conversationId", async (req, res) => {
   const { conversationId } = req.params;
+
   await messageModel
     .find({ conversationId })
-    .then((result: Array<any>) => {
-      if (!result || result.length === 0) res.send([]);
+    .then((result: any) => {
       res.send({ result });
     })
     .catch((error) => res.status(500).send({ result: "failed", error }));

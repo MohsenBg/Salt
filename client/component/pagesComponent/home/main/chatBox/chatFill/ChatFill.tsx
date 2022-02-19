@@ -16,13 +16,16 @@ import {
   AddConversation,
   Conversation_Type,
 } from "../../../../../../interface/other/conversationInterface";
+import { message } from "../../../../../../interface/other/MessageInterface";
 
 const Picker = dynamic(() => import("emoji-picker-react"), { ssr: false });
 
 const ChatFill = ({ messages, setMessages }: any) => {
   const [textareaValue, setTextareaValue] = useState("");
 
-  const conversation = useSelector((state: STORE_STATE) => state.conversation);
+  const selected_conversation = useSelector(
+    (state: STORE_STATE) => state.conversation.selected_conversation
+  );
   const allConversation = useSelector(
     //@ts-ignore
     (state: STORE_STATE) => state.conversation.allConventions
@@ -46,10 +49,10 @@ const ChatFill = ({ messages, setMessages }: any) => {
         { role: RoleType.MEMBER, userName: username, name },
         {
           role: RoleType.MEMBER,
-          //@ts-ignore
-          userName: conversation.username,
-          //@ts-ignore
-          name: conversation.name,
+
+          userName: selected_conversation.username,
+
+          name: selected_conversation.name,
         },
       ],
       ConversationType: Conversation_Type.SINGLE,
@@ -57,22 +60,18 @@ const ChatFill = ({ messages, setMessages }: any) => {
     await axios
       .post(`${url}/chat/conversation`, sendData)
       .then((result) => {
-        //@ts-ignore
         allConversation?.unshift({ ...result.data, lastMessage: null });
         conversation_Id = result.data._id;
         dispatch({
           type: conversationActionType.ALL_CONVERSATION,
-          //@ts-ignore
-          payload: [...allConversation],
+          payload: allConversation ? [...allConversation] : null,
         });
         dispatch({
           type: conversationActionType.SELECTED_CONVERSATION,
           payload: {
             id: result.data._id,
-            //@ts-ignore
-            username: conversation.username,
-            //@ts-ignore
-            name: conversation.name,
+            username: selected_conversation.username,
+            name: selected_conversation.name,
           },
         });
       })
@@ -85,18 +84,34 @@ const ChatFill = ({ messages, setMessages }: any) => {
 
     let NewConversation_Id = null;
     //@ts-ignore
-    if (conversation.conversation_Selected_Id === "new")
+    if (selected_conversation._id === "new")
       NewConversation_Id = await addConversation();
     if (NewConversation_Id === "error") return;
+    const value = textareaValue;
+    const newId = `${value}${Math.random() * 1000}`;
+    const newMessage: message = {
+      _id: newId,
+      conversationId:
+        NewConversation_Id !== null
+          ? NewConversation_Id
+          : selected_conversation._id,
+      sender: username,
+      createdAt: "",
+      updatedAt: "",
+      text: value,
+      __v: 0,
+    };
+    let Messages = [...messages, newMessage];
+    setMessages([...Messages]);
+    setTextareaValue("");
     await axios
       .post(`${url}/chat/message`, {
         conversationId:
           NewConversation_Id !== null
             ? NewConversation_Id
-            : //@ts-ignore
-              conversation.conversation_Selected_Id,
+            : selected_conversation._id,
         sender: username,
-        text: textareaValue,
+        text: value,
       })
       .then((result) => {
         let chatFill = document.getElementById("chatFill");
@@ -104,11 +119,11 @@ const ChatFill = ({ messages, setMessages }: any) => {
           //@ts-ignore
           chatFill.value = "";
         socket.emit("sendMessage", {
-          //@ts-ignore
-          to: conversation.username,
+          to: selected_conversation.username,
           data: result.data,
         });
-        setMessages([...messages, result.data]);
+        Messages[Messages.length - 1] = result.data;
+        setMessages([...Messages]);
         setTextareaValue("");
         dispatch({
           type: SocketActionType.SEND_MESSAGE,

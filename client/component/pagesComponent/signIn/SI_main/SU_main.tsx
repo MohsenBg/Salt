@@ -58,6 +58,7 @@ const SU_main = () => {
     }
   }, []);
 
+  //! handel CAPTCHA on change value
   const onReCAPTCHAChange = async (captchaCode: any) => {
     if (!captchaCode) return;
     if (
@@ -97,6 +98,7 @@ const SU_main = () => {
     recaptchaRef.current.reset();
   };
 
+  //!  check value is email
   const validateEmail = async (value: string) => {
     if (value.length >= 5 && value.includes("@") && value.includes(".")) {
       await axios
@@ -122,6 +124,7 @@ const SU_main = () => {
     }
   };
 
+  //!  check value is name
   const validateFullName = (value: string) => {
     if (value.length >= 5) {
       setValidateInputs({
@@ -139,6 +142,7 @@ const SU_main = () => {
     }
   };
 
+  //!  check value is valid username
   const validateUsername = async (value: string) => {
     if (value.length >= 5 && alphanumeric(value)) {
       await axios
@@ -170,6 +174,7 @@ const SU_main = () => {
     }
   };
 
+  //!  check value is valid password
   const validatePassword = (value: any) => {
     let pass = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,64}$/;
     if (value.match(pass)) {
@@ -191,6 +196,7 @@ const SU_main = () => {
     }
   };
 
+  //! handel Inputs when inputs change
   const handelInputChange = (inputType: string, inputValue: string) => {
     switch (inputType) {
       case InputsNames.EMAIL_INPUT:
